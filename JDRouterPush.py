@@ -113,7 +113,7 @@ def todayPointDetail():
         todayDate = result["todayDate"]
         totalRecord = result["pageInfo"]["totalRecord"]
         pointInfos = result["pointInfos"]
-        GlobalVariable.final_result["todayDate"] = todayDate
+        GlobalVariable.final_result["todayDate"] = datetime.datetime.strptime(todayDate, "%Y%m%d").strftime("%Y-%m-%d")
         GlobalVariable.final_result["totalRecord"] = str(totalRecord)
         GlobalVariable.final_result["pointInfos"] = pointInfos
         for info in pointInfos:
@@ -266,19 +266,19 @@ def resultDisplay():
                        + "\n    - 最近到期积分：" + str(recentExpireAmount) \
                        + "\n    - 最近到期时间：" + recentExpireTime \
                        + "\n    - 最近" + str(GlobalVariable.records_num) + "条记录："
-        # pointRecords = pointInfo["pointRecords"]
-        # if pointInfo.get("pointRecords") is not None:
-        #     for pointRecord in pointRecords:
-        #         recordType = pointRecord["recordType"]
-        #         recordType_str = ""
-        #         if recordType == 1:
-        #             recordType_str = "积分收入："
-        #         else:
-        #             recordType_str = "积分支出："
-        #         pointAmount = pointRecord["pointAmount"]
-        #         createTime = pointRecord["createTime"]
-        #         point_infos = point_infos + "\n        - " + \
-        #                       createTime + "  " + recordType_str + str(pointAmount)
+        pointRecords = pointInfo["pointRecords"]
+        if pointInfo.get("pointRecords") is not None:
+            for pointRecord in pointRecords:
+                recordType = pointRecord["recordType"]
+                recordType_str = ""
+                if recordType == 1:
+                    recordType_str = "积分收入："
+                else:
+                    recordType_str = "积分支出："
+                pointAmount = pointRecord["pointAmount"]
+                createTime = pointRecord["createTime"]
+                point_infos = point_infos + "\n        - " + \
+                              createTime + "  " + recordType_str + str(pointAmount)
     notifyContentJson = {"content": content, "date": todayDate, "total_today": today_total_point,
                          "avail_today": total_avail_point, "account": bindAccount, "devicesCount": totalRecord,
                          "detail": point_infos}
