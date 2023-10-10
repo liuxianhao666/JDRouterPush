@@ -192,7 +192,7 @@ def resolveDeviceIP(DEVICE_IP):
 
 # 检测更新
 def checkForUpdates():
-    remote_address = "https://endpoint.fastgit.org/https://raw.githubusercontent.com/leifengwl/JDRouterPush/main/config.ini"
+    remote_address = "https://raw.githubusercontent.com/leifengwl/JDRouterPush/main/config.ini"
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36"
     }
@@ -215,7 +215,7 @@ def checkForUpdates():
 def resultDisplay():
     today_date = GlobalVariable.final_result["today_date"]
     today_total_point = GlobalVariable.final_result["today_total_point"]
-    title = today_date + "京东云到账积分:" + today_total_point
+    title = today_date + "到账积分:" + today_total_point
     if GlobalVariable.final_result.get("todayDate") is None:
         push("信息获取失败,无权限", "请检查wskey是否有效")
         return
